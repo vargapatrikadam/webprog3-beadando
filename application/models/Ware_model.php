@@ -29,4 +29,14 @@ class Ware_model extends CI_Model {
         $result_record = $query->row_array();
         return $result_record;
     }
+    public function get_list_by_category_id($id){
+        $query = $this->db->get_where(
+            'ware',
+            array(
+                'ware_category_id' => $id
+            )
+        );
+        $result = $query->result_array();
+        return $result;
+    }
 }

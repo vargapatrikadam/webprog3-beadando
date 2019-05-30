@@ -11,9 +11,19 @@ class Ware_category_model extends CI_Model {
     }
     public function get_record($id){
         $query = $this->db->get_where(
-                'news',
+                'ware_category',
                 array(
                     'id' => $id
+                )
+                );
+        $result_record = $query->row_array();
+        return $result_record;
+    }
+    public function get_record_by_slug($slug){
+        $query = $this->db->get_where(
+                'ware_category',
+                array(
+                    'slug' => $slug
                 )
                 );
         $result_record = $query->row_array();

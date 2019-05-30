@@ -29,4 +29,15 @@ class Ware_details_model extends CI_Model {
         $result_record = $query->row_array();
         return $result_record;
     }
+    public function get_record_by_slug($slug){
+        $this->db->select('ware.id,ware.name,ware.ware_category_id,ware.slug,ware_details.description');
+        $this->db->from('ware');
+        $this->db->join('ware_details','ware.id = ware_details.ware_id');
+        $this->db->where('ware.slug',$slug);
+
+        $query = $this->db->get();
+
+        $data = $query->row_array();
+        return $data;
+    }
 }
