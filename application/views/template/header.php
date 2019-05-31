@@ -52,6 +52,9 @@
         </div>
       </li>
     </ul>
+    <?php if($is_admin):?>
+      <a class="nav-link" href="<?=site_url('auth')?>">Admin panel<span class="sr-only">(current)</span></a>
+    <?php endif;?>
     <?php if($logged_in):?>
       <a class="nav-link" href="<?=site_url('auth/logout')?>">Kijelentkezés<span class="sr-only">(current)</span></a>
     <?php else:?>
