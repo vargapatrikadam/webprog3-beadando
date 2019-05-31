@@ -7,8 +7,6 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Bootstrap core CSS -->
-    <link href="/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
 
     <style>
       .bd-placeholder-img {
@@ -30,7 +28,7 @@
     <link href="https://getbootstrap.com/docs/4.3/examples/navbar-fixed/navbar-top-fixed.css" rel="stylesheet">
     </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
   <a class="navbar-brand" href="#"><?=$title?></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -38,11 +36,13 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="<?=site_url('ware')?>">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="<?=site_url('ware')?>">Főoldal<span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="<?=site_url('auth')?>">Link</a>
-      </li>
+      <?php if($logged_in):?>
+        <li class="nav-item">
+          <a class="nav-link" href="<?=site_url('cart')?>">Kosár</a>
+        </li>
+      <?php endif;?>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategóriák</a>
         <div class="dropdown-menu" aria-labelledby="dropdown01">
@@ -56,6 +56,7 @@
       <a class="nav-link" href="<?=site_url('auth/logout')?>">Kijelentkezés<span class="sr-only">(current)</span></a>
     <?php else:?>
       <a class="nav-link" href="<?=site_url('auth/login')?>">Bejelentkezés<span class="sr-only">(current)</span></a>
+      <a class="nav-link" href="<?=site_url('register')?>">Regisztráció<span class="sr-only">(current)</span></a>
     <?php endif;?>
   </div>
 </nav>
