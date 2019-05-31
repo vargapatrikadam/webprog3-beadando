@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
-<link href="https://getbootstrap.com/docs/4.3/examples/sign-in/signin.css" rel="stylesheet">
+<link href="../assets/css/signin.css" rel="stylesheet">
 <div class='text-center'>
     <?php
     echo isset($_SESSION['auth_message']) ? $_SESSION['auth_message'] : FALSE;

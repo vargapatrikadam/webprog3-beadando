@@ -98,6 +98,7 @@ class CI_Controller {
 		$main_data['title'] = 'Bolt';
 		$main_data['categories'] = $this->ware_category->get_list();
 		$main_data['logged_in'] = isset($this->ion_auth) ? $this->ion_auth->logged_in() : false;
+		$main_data['is_admin'] = isset($this->ion_auth) ? $this->ion_auth->is_admin() : false;
 		
 		$this->load->view('template/header',$main_data);
 		$this->load->view($view,$data);

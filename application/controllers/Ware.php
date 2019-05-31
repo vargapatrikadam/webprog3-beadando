@@ -23,7 +23,7 @@ class Ware extends CI_Controller{
             show_404();
         }
 
-        $item = $this->ware_details->get_record_by_slug($slug);
+        $item = $this->ware->get_record_by_slug($slug);
 
         if(empty($item) || $item == null){
             show_404();

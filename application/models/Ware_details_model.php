@@ -29,6 +29,7 @@ class Ware_details_model extends CI_Model {
         $result_record = $query->row_array();
         return $result_record;
     }
+    //TODO: itt valami nem oké
     public function get_record_by_slug($slug){
         $this->db->select('ware.id, ware.name, ware.ware_category_id, ware.slug, ware_details.description, ware.price');
         $this->db->from('ware');
