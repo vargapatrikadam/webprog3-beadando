@@ -41,7 +41,7 @@
         <a class="nav-link" href="<?=site_url('ware')?>">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Link</a>
+        <a class="nav-link" href="<?=site_url('auth')?>">Link</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Kategóriák</a>
@@ -52,10 +52,11 @@
         </div>
       </li>
     </ul>
-    <form class="form-inline mt-2 mt-md-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+    <?php if($logged_in):?>
+      <a class="nav-link" href="<?=site_url('auth/logout')?>">Kijelentkezés<span class="sr-only">(current)</span></a>
+    <?php else:?>
+      <a class="nav-link" href="<?=site_url('auth/login')?>">Bejelentkezés<span class="sr-only">(current)</span></a>
+    <?php endif;?>
   </div>
 </nav>
 

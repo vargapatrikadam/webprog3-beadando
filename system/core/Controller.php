@@ -97,7 +97,7 @@ class CI_Controller {
 	public function render_page($view, $data){
 		$main_data['title'] = 'Bolt';
 		$main_data['categories'] = $this->ware_category->get_list();
-
+		$main_data['logged_in'] = isset($this->ion_auth) ? $this->ion_auth->logged_in() : false;
 		
 		$this->load->view('template/header',$main_data);
 		$this->load->view($view,$data);
