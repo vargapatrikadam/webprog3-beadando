@@ -11,7 +11,6 @@ class Ware extends CI_Controller{
     public function index(){
         $wares = $this->ware->get_list();
 
-        $data['title'] = 'Áruk listája';
         $data['items'] = $wares;
 
         $categories = $this->ware_category->get_list();
@@ -31,6 +30,6 @@ class Ware extends CI_Controller{
         }
         $data['item'] = $item;
         
-        $this->load->view('ware/show',$data);
+        $this->render_page('ware/show',$data);
     }
 }

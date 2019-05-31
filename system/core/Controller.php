@@ -78,6 +78,8 @@ class CI_Controller {
 		$this->load =& load_class('Loader', 'core');
 		$this->load->initialize();
 		log_message('info', 'Controller Class Initialized');
+
+		$this->load->model('ware_category_model','ware_category');
 	}
 
 	// --------------------------------------------------------------------
@@ -93,8 +95,12 @@ class CI_Controller {
 		return self::$instance;
 	}
 	public function render_page($view, $data){
-		$this->load->view('template/header');
+		$main_data['title'] = 'Bolt';
+		$main_data['categories'] = $this->ware_category->get_list();
+
+		
+		$this->load->view('template/header',$main_data);
 		$this->load->view($view,$data);
-		$this->load->view('template/footer');
+		$this->load->view('template/footer',$main_data);
 	}
 }

@@ -32,6 +32,6 @@ class Category extends CI_Controller{
         }
         $data['item'] = $item;
         
-        $this->load->view('ware/show',$data);
+        $this->render_page('ware/show',$data);
     }
 }
