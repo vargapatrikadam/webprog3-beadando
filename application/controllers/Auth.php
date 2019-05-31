@@ -81,6 +81,10 @@ class Auth extends CI_Controller
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
+				$_SESSION['logged_in'] = TRUE;
+				$_SESSION['user_id'] = $this->ion_auth->get_user_id();
+				$_SESSION['cart'] = array();
+				
 				redirect('/', 'refresh');
 			}
 			else
@@ -110,7 +114,7 @@ class Auth extends CI_Controller
 				'type' => 'password',
 			];
 
-			$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'login', $this->data);
+			$this->render_page('auth/login', $this->data);
 		}
 	}
 

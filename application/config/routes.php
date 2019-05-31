@@ -55,3 +55,6 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['ware/(:any)'] = 'ware/show/$1';
 $route['category/(:any)'] = 'category/index/$1';
+$route['cart/add/(:any)'] = 'cart/add/$1';
+$route['cart/remove/(:any)'] = 'cart/delete/$1';
+$route['cart/(:any)'] = 'cart/list/$1';
