@@ -1,14 +1,19 @@
 <?php if($items != null || !empty($items)): ?>  
+    <h3><?php echo $title?></h3>
     <?php foreach($items as $item): ?>
-        <div>
-            <h3><?=$item['name']?></h3>
-            <p><?=$item['price']?><?php echo(' Ft')?></p>
-            <a href="<?=site_url('ware/'.$item['slug'])?>"><?php echo('Megnéz')?></a></br>
-            <p><?=$item['ware_category_id']?></p>
-            <?php if( isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == true)):?>
-                <a href="<?=site_url('cart/add/'.$item['slug'])?>"><?php echo('Kosárba')?></a></br>
-            <?php endif;?>
-        </div>
+        <ul>
+            <li class="media">
+                <img class="mr-3" style="width: 64px; height: 64px; object-fit: cover;" alt="Generic placeholder image" src="<?php echo base_url($item['picture'])?>"/>
+                <div class="media-body">
+                    <h5 class="mt-0 mb-1"><?=$item['name']?></h5>
+                    <?=$item['price']?><?php echo(' Ft')?>
+                    <a href="<?=site_url('ware/'.$item['slug'])?>"><?php echo('Megnéz')?></a>
+                    <?php if( isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == true)):?>
+                        <a href="<?=site_url('cart/add/'.$item['slug'])?>"><?php echo('Kosárba')?></a>
+                    <?php endif;?>
+                </div>
+            </li>
+        </ul>
     <?php endforeach;?>
 <?php else: ?>
     <?php echo('Nincsenek áruk')?><br/>

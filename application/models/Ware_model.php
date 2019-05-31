@@ -5,7 +5,12 @@ class Ware_model extends CI_Model {
         $this->load->database();
     }
     public function get_list(){
-        $query = $this->db->get('ware');
+        $this->db->select('ware.id, ware.name, ware.price, ware.slug, ware.ware_category_id, ware_details.picture, ware_details.description');
+        $this->db->from('ware');
+        $this->db->join('ware_details','ware.id = ware_details.id');
+
+        $query = $this->db->get();
+
         $result = $query->result_array();
         return $result;
     }
@@ -30,12 +35,13 @@ class Ware_model extends CI_Model {
         return $result_record;
     }
     public function get_list_by_category_id($id){
-        $query = $this->db->get_where(
-            'ware',
-            array(
-                'ware_category_id' => $id
-            )
-        );
+        $this->db->select('ware.id, ware.name, ware.price, ware.slug, ware.ware_category_id, ware_details.picture, ware_details.description');
+        $this->db->from('ware');
+        $this->db->join('ware_details','ware.id = ware_details.id');
+        $this->db->where('ware_category_id',$id);
+
+        $query = $this->db->get();
+
         $result = $query->result_array();
         return $result;
     }

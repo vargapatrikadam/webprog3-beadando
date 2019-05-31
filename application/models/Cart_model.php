@@ -5,9 +5,10 @@ class Cart_model extends CI_Model {
     }
 
     public function get_cart_items(){
-        $this->db->select('cart.id, cart.ware_id, cart.users_id, ware.name, ware.slug, ware.price');
+        $this->db->select('cart.id, cart.ware_id, cart.users_id, ware.name, ware.slug, ware.price, ware_details.picture');
         $this->db->from('cart');
         $this->db->join('ware','ware.id = cart.ware_id');
+        $this->db->join('ware_details','ware.id = ware_details.ware_id');
         $this->db->where('cart.users_id', $this->ion_auth->get_user_id());
 
         $query = $this->db->get();
