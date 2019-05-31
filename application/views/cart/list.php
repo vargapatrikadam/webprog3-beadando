@@ -1,5 +1,6 @@
 <?php if($items != null || !empty($items)): ?> 
     <h2><?php echo($sum_price); ?> Ft</h2>
+    <a href="<?=site_url('cart/checkout')?>"><?php echo('Megrendel')?></a></br>
     <?php foreach($items as $item): ?>
         <div>
             <h3><?=$item['name']?></h3>

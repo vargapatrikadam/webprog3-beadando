@@ -1,5 +1,5 @@
 <?php
-class Ware_details_model extends CI_Model {
+class Receipt_model extends CI_Model {
     public function __construct(){
         parent::__construct();
         $this->load->database();
@@ -29,13 +29,21 @@ class Ware_details_model extends CI_Model {
         $result_record = $query->row_array();
         return $result_record;
     }
-    public function add($user_id){
+    public function add(){
         $data = array(
-            'user_id' => $user_id,
+            'users_id' => $this->ion_auth->get_user_id(),
+            'postal_code' => $this->input->post('postal_code'),
+            'city' => $this->input->post('city'),
+            'street' => $this->input->post('street'),
+            'street_number' => $this->input->post('street_number'),
             'date' => time()
         );
-        
-        return $this->db->insert('receipt', $data);
+
+        $this->db->insert('receipt', $data);
+
+        $insert_id = $this->db->insert_id();
+
+        return $insert_id;
     }
     public function delete($id){
         return $this->db->delete('receipt',array('id' => $id));

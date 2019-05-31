@@ -35,20 +35,10 @@ class Cart_model extends CI_Model {
     }
 
     public function remove_from_cart($id){
-        /*$query = $this->db->get_where(
-            'ware',
-            array(
-                'slug' => $slug
-            )
-            );
-        $result_record = $query->row_array();
-        
-        $data = array(
-            'ware_id' => $result_record['id'],
-            'users_id' => $this->ion_auth->get_user_id()
-        );
-        
-        return $this->db->delete('cart',$data);*/
         return $this->db->delete('cart',array('id'=>$id));
+    }
+
+    public function empty_cart(){
+        return $this->db->delete('cart', array('users_id'=> $this->ion_auth->get_user_id()));
     }
 }
