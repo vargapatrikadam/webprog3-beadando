@@ -3,14 +3,15 @@
 
 <div id="infoMessage"><?php echo $message;?></div>
 
-<table cellpadding=0 cellspacing=10>
+<div class="table-responsive">
+<table class="table table-sm">
 	<tr>
-		<th><?php echo lang('index_fname_th');?></th>
-		<th><?php echo lang('index_lname_th');?></th>
-		<th><?php echo lang('index_email_th');?></th>
-		<th><?php echo lang('index_groups_th');?></th>
-		<th><?php echo lang('index_status_th');?></th>
-		<th><?php echo lang('index_action_th');?></th>
+		<th scope="col"><?php echo lang('index_fname_th');?></th>
+		<th scope="col"><?php echo lang('index_lname_th');?></th>
+		<th scope="col"><?php echo lang('index_email_th');?></th>
+		<th scope="col"><?php echo lang('index_groups_th');?></th>
+		<th scope="col"><?php echo lang('index_status_th');?></th>
+		<th scope="col"><?php echo lang('index_action_th');?></th>
 	</tr>
 	<?php foreach ($users as $user):?>
 		<tr>
@@ -27,5 +28,6 @@
 		</tr>
 	<?php endforeach;?>
 </table>
+</div>
 
 <p><?php echo anchor('auth/create_user', lang('index_create_user_link'))?> | <?php echo anchor('auth/create_group', lang('index_create_group_link'))?></p>
