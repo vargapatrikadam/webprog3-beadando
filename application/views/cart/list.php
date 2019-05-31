@@ -1,3 +1,6 @@
+<?php if (isset($message)):?>
+    <?php echo($message);?><br/>
+<?php endif;?>
 <?php if($items != null || !empty($items)): ?> 
     <h1>Kosár</h1>
     <h2><?php echo($sum_price); ?> Ft</h2>

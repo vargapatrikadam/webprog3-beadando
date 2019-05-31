@@ -76,6 +76,7 @@ class Cart extends CI_Controller{
             $this->cart->empty_cart();
 
             $data['items'] = $this->cart->get_cart_items();
+            $data['message'] = 'Sikeres megrendelés!';
 
             $this->render_page('cart/list',$data);
         }
