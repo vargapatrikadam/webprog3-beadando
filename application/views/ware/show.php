@@ -8,5 +8,12 @@
 </div>
 <?php if( isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == true)):?>
                 <a href="<?=site_url('cart/add/'.$item['slug'])?>"><?php echo('Kosárba')?></a>
+
+<?php endif;?>
+<?php if(isset($_SESSION['is_admin']) && ($_SESSION['is_admin'] == TRUE)):?>
+      <?php echo form_open_multipart('ware/'.$item['slug'].'/upload');?>
+      <?php echo "<input type='file' name='userfile' size='20' />"; ?>
+      <?php echo "<input type='submit' name='submit' value='upload' /> ";?>
+      <?php echo "</form>"?>
 <?php endif;?>
 <br/><a href="<?=site_url('ware')?>"><?php echo('Vissza')?><br/></a>

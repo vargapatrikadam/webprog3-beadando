@@ -82,6 +82,7 @@ class Auth extends CI_Controller
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
 				$_SESSION['logged_in'] = TRUE;
+				$_SESSION['is_admin'] = $this->ion_auth->is_admin();
 				$_SESSION['user_id'] = $this->ion_auth->get_user_id();
 				$_SESSION['cart'] = array();
 				

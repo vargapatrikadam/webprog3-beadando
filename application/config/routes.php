@@ -53,6 +53,7 @@ $route['default_controller'] = 'ware';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['ware/(:any)/upload'] = 'ware/upload/$1';
 $route['ware/(:any)'] = 'ware/show/$1';
 $route['category/(:any)'] = 'category/index/$1';
 $route['cart/checkout'] = 'cart/load_checkout_page';
