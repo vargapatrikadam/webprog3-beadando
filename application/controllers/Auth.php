@@ -19,6 +19,8 @@ class Auth extends CI_Controller
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
 		$this->lang->load('auth');
+		$this->load->helper('file');
+		$this->load->model('Ware_model','ware');
 	}
 
 	/**
@@ -54,6 +56,8 @@ class Auth extends CI_Controller
 			{
 				$this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
 			}
+			$this->data['wares'] = $this->ware->get_list();
+
 			$this->render_page('auth/index',$this->data);
 			//$this->_render_page('auth' . DIRECTORY_SEPARATOR . 'index', $this->data);
 		}
@@ -901,5 +905,94 @@ class Auth extends CI_Controller
 			return $view_html;
 		}
 	}
+	public function import(){
+        $data = array();
+        $memData = array();
+        
+        // If import request is submitted
+        if($this->input->post('importSubmit')){
+            // Form field validation rules
+            $this->form_validation->set_rules('file', 'CSV file', 'callback_file_check');
+            
+            // Validate submitted form data
+            if($this->form_validation->run() == true){
+                $insertCount = $updateCount = $rowCount = $notAddCount = 0;
+                
+                // If file uploaded
+                if(is_uploaded_file($_FILES['file']['tmp_name'])){
+                    // Load CSV reader library
+					$this->load->library('CSVParser');
+					$this->load->model('Ware_model','ware');
+					$this->load->model('Ware_details_model','ware_details');
+					$this->load->model('Ware_category_model','category');
+					
+                    // Parse data from CSV file
+                    $csvData = $this->csvparser->parse($_FILES['file']['tmp_name']);
+                    
+                    // Insert/update CSV data into database
+                    if(!empty($csvData)){
+                        foreach($csvData as $row){ 
+							$rowCount++;
+                            // Prepare data for DB insertion
+                            $wareData = array(
+                                'name' => $row['Name'],
+                                'price' => $row['Price'],
+                                'category' => $row['Category'],
+                                'description' => $row['Description'],
+                            );
+                            
+                            // Check whether category already exists in the database
+                            $category = $this->ware_category->get_record_by_name($row['Category']);
+                            
+                            if(!empty($category)){
+								$wareData['ware_category_id'] = $category['id'];
+                            }else{
+								$wareData['ware_category_id'] = $this->ware_category->add($wareData);
+							}
+							$wareData['ware_id'] = $this->ware->add($wareData);
 
+							
+							if($this->ware_details->add($wareData)){
+								$insertCount++;
+							}
+                        }
+                    }
+                        
+                    // Status message with imported data count
+                    $notAddCount = ($rowCount - $insertCount);
+					$successMsg = 'Áruk sikeresen beimportálva. Összes elem: ('.$rowCount.') | Hozzáadva: ('.$insertCount.') | Sikertelen: ('.$notAddCount.')';
+					$_SESSION['success_msg'] = $successMsg;
+					$this->session->mark_as_flash('success_msg');
+                }
+            }else{
+				$_SESSION['error_msg'] = 'Hiba a feltöltés során, kérjük próbálja újra.';
+				$this->session->mark_as_flash('error_msg');
+            }
+        }else{
+			$_SESSION['error_msg'] = 'Érvénytelen fájl, kérjük csak CSV formátumú fájlt töltsön fel.';
+			$this->session->mark_as_flash('error_msg');
+		}
+		redirect('auth');
+    }
+    
+    /*
+     * Callback function to check file value and type during validation
+     */
+    public function file_check($str){
+        $allowed_mime_types = array('text/x-comma-separated-values', 'text/comma-separated-values', 'application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 'text/csv', 'application/csv', 'application/excel', 'application/vnd.msexcel', 'text/plain');
+        if(isset($_FILES['file']['name']) && $_FILES['file']['name'] != ""){
+            $mime = get_mime_by_extension($_FILES['file']['name']);
+            $fileAr = explode('.', $_FILES['file']['name']);
+            $ext = end($fileAr);
+            if(($ext == 'csv') && in_array($mime, $allowed_mime_types)){
+                return true;
+            }else{
+                $this->form_validation->set_message('file_check', 'Please select only CSV file to upload.');
+                return false;
+            }
+        }else{
+            $this->form_validation->set_message('file_check', 'Please select a CSV file to upload.');
+            return false;
+        }
+    }
 }

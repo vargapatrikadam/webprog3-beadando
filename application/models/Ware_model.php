@@ -5,9 +5,11 @@ class Ware_model extends CI_Model {
         $this->load->database();
     }
     public function get_list(){
-        $this->db->select('ware.id, ware.name, ware.price, ware.slug, ware.ware_category_id, ware_details.picture, ware_details.description');
+        $this->db->select('ware.id, ware.name, ware.price, ware.slug, ware.ware_category_id, ware_details.picture, ware_details.description, ware_category.name AS category_name');
         $this->db->from('ware');
         $this->db->join('ware_details','ware.id = ware_details.ware_id');
+        $this->db->join('ware_category','ware.ware_category_id = ware_category.id');
+        $this->db->order_by('id', 'ASC');
 
         $query = $this->db->get();
 
@@ -45,5 +47,27 @@ class Ware_model extends CI_Model {
 
         $result = $query->result_array();
         return $result;
+    }
+    public function add($new_row){
+        $this->load->helper('url');
+        $this->load->helper('text');
+
+        $data = array(
+            'name' => $new_row['name'],
+            'price' => $new_row['price'],
+            'slug' => url_title(
+                        convert_accented_characters($new_row['name']),
+                        'dash',
+                        TRUE
+                    ),
+            'ware_category_id' => $new_row['ware_category_id']
+        );
+        $this->db->insert('ware', $data);
+
+        $insert_id = $this->db->insert_id();
+        return $insert_id;
+    }
+    public function delete($id){
+        return $this->db->delete('ware',array('id' => $id));
     }
 }

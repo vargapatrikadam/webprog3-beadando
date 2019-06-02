@@ -53,4 +53,8 @@ class Ware extends CI_Controller{
         }
         redirect('ware/'.$slug);
     }
+    public function delete($id = null){
+        $this->ware->delete($id);
+        redirect($_SERVER['HTTP_REFERER']);
+    }
 }

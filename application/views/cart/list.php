@@ -11,9 +11,9 @@
                 <img class="mr-3" style="width: 64px; height: 64px; object-fit: cover;" alt="Generic placeholder image" src="<?php echo base_url($item['picture'])?>"/>
                 <div class="media-body">
                     <h5 class="mt-0 mb-1"><?=$item['name']?></h5>
-                    <?=$item['price']?><?php echo(' Ft')?>
-                    <a href="<?=site_url('ware/'.$item['slug'])?>"><?php echo('Megnéz')?></a>
-                    <a href="<?=site_url('cart/remove/'.$item['id'])?>"><?php echo('Töröl')?></a>
+                    <?=$item['price']?><?php echo(' Ft')?><br/>
+                    <a class="btn btn-primary btn-sm" href="<?=site_url('ware/'.$item['slug'])?>"><?php echo('Megnéz')?></a>
+                    <a class="btn btn-primary btn-sm" href="<?=site_url('cart/remove/'.$item['id'])?>"><?php echo('Töröl')?></a>
                 </div>
             </li>
         </ul>

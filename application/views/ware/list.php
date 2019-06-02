@@ -7,9 +7,9 @@
                 <div class="media-body">
                     <h5 class="mt-0 mb-1"><?=$item['name']?></h5>
                     <?=$item['price']?><?php echo(' Ft')?><br/>
-                    <a href="<?=site_url('ware/'.$item['slug'])?>"><?php echo('Megnéz')?></a><br/>
+                    <a class="btn btn-primary btn-sm" href="<?=site_url('ware/'.$item['slug'])?>"><?php echo('Megnéz')?></a>
                     <?php if( isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == true)):?>
-                        <a href="<?=site_url('cart/add/'.$item['slug'])?>"><?php echo('Kosárba')?></a>
+                        <a class="btn btn-primary btn-sm" href="<?=site_url('cart/add/'.$item['slug'])?>"><?php echo('Kosárba')?></a>
                     <?php endif;?>
                 </div>
             </li>

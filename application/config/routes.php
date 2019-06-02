@@ -53,6 +53,7 @@ $route['default_controller'] = 'ware';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['ware/delete/(:any)'] = 'ware/delete/$1';
 $route['ware/(:any)/upload'] = 'ware/upload/$1';
 $route['ware/(:any)'] = 'ware/show/$1';
 $route['category/(:any)'] = 'category/index/$1';
@@ -61,3 +62,4 @@ $route['cart/order'] = 'cart/order';
 $route['cart/add/(:any)'] = 'cart/add/$1';
 $route['cart/remove/(:any)'] = 'cart/delete/$1';
 $route['cart/(:any)'] = 'cart/index/$1';
+$route['auth/import'] = 'auth/import';

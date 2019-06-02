@@ -60,4 +60,12 @@ class Ware_details_model extends CI_Model {
         $this->db->where('id',$id);
         $this->db->update('ware_details',$modified_data);
     }
+    public function add($new_row){
+        $data = array(
+            'description' => $new_row['description'],
+            'ware_id' => $new_row['ware_id']
+        );
+        
+        return $this->db->insert('ware_details', $data);
+    }
 }
