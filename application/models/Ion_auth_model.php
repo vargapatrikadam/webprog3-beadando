@@ -2790,4 +2790,15 @@ class Ion_auth_model extends CI_Model
 			return FALSE;
 		}
 	}
+	public function get_user_data(){
+        $this->db->select('username, email, first_name, last_name');
+        $this->db->from('users');
+        $this->db->where('id',$this->ion_auth->get_user_id());
+
+        $query = $this->db->get();
+
+        $data = $query->result_array();
+
+        return $data;
+    }
 }

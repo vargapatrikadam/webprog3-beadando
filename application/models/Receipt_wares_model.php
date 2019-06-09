@@ -40,4 +40,16 @@ class Receipt_wares_model extends CI_Model {
     public function delete($id){
         return $this->db->delete('receipt_wares',array('id' => $id));
     }
+    public function get_wares_by_receipt_id($receipt_id){
+        $this->db->select('ware.id, ware.name, ware.price, ware.slug');
+        $this->db->from('ware');
+        $this->db->join('receipt_wares', 'receipt_wares.ware_id = ware.id');
+        $this->db->where('receipt_wares.receipt_id',$receipt_id);
+
+        $query = $this->db->get();
+
+        $data = $query->result_array();
+
+        return $data;
+    }
 }

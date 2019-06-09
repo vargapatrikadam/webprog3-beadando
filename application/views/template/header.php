@@ -52,6 +52,9 @@
         </div>
       </li>
     </ul>
+    <?php if( isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] == true)):?>
+      <a class="nav-link" href="<?=site_url('user-panel')?>">Felhasználói fiók<span class="sr-only">(current)</span></a>
+    <?php endif; ?>
     <?php if($is_admin):?>
       <a class="nav-link" href="<?=site_url('auth')?>">Admin panel<span class="sr-only">(current)</span></a>
     <?php endif;?>

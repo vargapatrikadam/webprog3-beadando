@@ -53,6 +53,7 @@ $route['default_controller'] = 'ware';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['user-panel'] = 'userpanel/index';
 $route['ware/delete/(:any)'] = 'ware/delete/$1';
 $route['ware/(:any)/upload'] = 'ware/upload/$1';
 $route['ware/(:any)'] = 'ware/show/$1';

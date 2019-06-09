@@ -1,5 +1,5 @@
 <div class="media">
-  <img class="img-thumbnail" style="width: 20%; object-fit: cover;" src="<?php echo base_url($item['picture'])?>" alt="Generic placeholder image">
+  <img class="img-thumbnail" style="width: 20%; object-fit: cover;" src="<?php echo base_url($item['picture'])?>">
   <div class="media-body">
   <div class="container">
     <h5 class="mt-0"><?=$item['name']?></h5>

@@ -48,4 +48,17 @@ class Receipt_model extends CI_Model {
     public function delete($id){
         return $this->db->delete('receipt',array('id' => $id));
     }
+
+    public function get_user_receipts(){
+
+        $this->db->select('id, date, postal_code, city, street, street_number');
+        $this->db->from('receipt');
+        $this->db->where('users_id',$this->ion_auth->get_user_id());
+
+        $query = $this->db->get();
+
+        $data = $query->result_array();
+
+        return $data;
+    }
 }
