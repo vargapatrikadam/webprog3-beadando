@@ -23,4 +23,28 @@ class Userpanel extends CI_Controller{
 
         $this->render_page('userpanel/index',$data);
      }
+     public function exportCSV(){ 
+        $filename = 'receipts.csv'; 
+        header("Content-Description: File Transfer"); 
+        header("Content-Disposition: attachment; filename=$filename"); 
+        header("Content-Type: application/csv; charset=utf-8");
+        
+        $user_receipts = $this->receipt_wares->get_all_receipts_for_user();
+
+        foreach ($user_receipts as &$receipt){
+            $receipt['date'] = gmdate("F j, Y, H:i:s", $receipt['date']);
+        }
+
+        $file = fopen('php://output', 'w');
+      
+        $header = array_map("utf8_decode", array("Áru név","Áru ár","Dátum","Irányítószám","Város","Utca","Házszám")); 
+        fputcsv($file, $header,";");
+        foreach ($user_receipts as $key=>$line){
+            $line = array_map("utf8_decode", $line);
+            fputcsv($file,$line, ";"); 
+        }
+        fclose($file);
+        exit;
+        redirect('user-panel');
+       }
 }

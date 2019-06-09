@@ -8,6 +8,7 @@
 </div>
 <p>
 <h3>Korábbi vásárlások</h3>
+<td><a href="<?=site_url('user-panel/export')?>"><?php echo('Összes exportálása')?></a></td>
 <?php foreach ($user_receipts as $receipt):?>
 <div class="accordion" id="accordionExample">
   <div class="card">

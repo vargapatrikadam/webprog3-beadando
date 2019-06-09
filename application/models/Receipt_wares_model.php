@@ -52,4 +52,17 @@ class Receipt_wares_model extends CI_Model {
 
         return $data;
     }
+    public function get_all_receipts_for_user(){
+        $this->db->select('ware.name, ware.price, receipt.date, receipt.postal_code, receipt.city, receipt.street, receipt.street_number');
+        $this->db->from('ware');
+        $this->db->join('receipt_wares', 'ware.id = receipt_wares.ware_id');
+        $this->db->join('receipt','receipt.id = receipt_wares.receipt_id');
+        $this->db->where('receipt.users_id', $this->ion_auth->get_user_id());
+
+        $query = $this->db->get();
+
+        $data = $query->result_array();
+
+        return $data;
+    }
 }
