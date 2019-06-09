@@ -52,6 +52,7 @@ class Ware_model extends CI_Model {
         $this->load->helper('url');
         $this->load->helper('text');
 
+        
         $data = array(
             'name' => $new_row['name'],
             'price' => $new_row['price'],

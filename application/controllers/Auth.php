@@ -908,11 +908,13 @@ class Auth extends CI_Controller
 	public function import(){
         $data = array();
         $memData = array();
-        
+		
+		$this->form_validation->set_rules('file', 'CSV file', 'callback_file_check|is_unique[ware.name]');
+
+		
         // If import request is submitted
         if($this->input->post('importSubmit')){
             // Form field validation rules
-            $this->form_validation->set_rules('file', 'CSV file', 'callback_file_check');
             
             // Validate submitted form data
             if($this->form_validation->run() == true){

@@ -66,6 +66,7 @@
   	<div class="collapse" id="collapseExample">
     	<div class="card card-body">
     		<?php echo form_open_multipart('auth/import');?>
+			<?php if(validation_errors()) echo validation_errors(); ?>
     		<?php echo "<input type='file' name='file' size='20' />"; ?>
     		<?php echo "<input type='submit' name='importSubmit' value='Mehet' /> ";?>
     		<?php echo "</form>"?>
