@@ -55,4 +55,7 @@ class Ware_category_model extends CI_Model {
         $insert_id = $this->db->insert_id();
         return $insert_id;
     }
+    public function delete($id){
+        return $this->db->delete('ware_category',array('id' => $id));
+    }
 }
