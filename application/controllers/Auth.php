@@ -909,13 +909,10 @@ class Auth extends CI_Controller
         $data = array();
         $memData = array();
 		
-		$this->form_validation->set_rules('file', 'CSV file', 'callback_file_check|is_unique[ware.name]');
-
-		
         // If import request is submitted
         if($this->input->post('importSubmit')){
             // Form field validation rules
-            
+			$this->form_validation->set_rules('file', 'CSV file', 'callback_file_check');
             // Validate submitted form data
             if($this->form_validation->run() == true){
                 $insertCount = $updateCount = $rowCount = $notAddCount = 0;
@@ -951,12 +948,17 @@ class Auth extends CI_Controller
                             }else{
 								$wareData['ware_category_id'] = $this->ware_category->add($wareData);
 							}
-							$wareData['ware_id'] = $this->ware->add($wareData);
 
-							
-							if($this->ware_details->add($wareData)){
-								$insertCount++;
-							}
+							//add new row to the db, returns an array containing data if it was successfully added or not (['exists'] and ['insert_id']).
+							//if the name wasn't unique, the ['exists'] is true, and ['insert_id'] is -1.
+							$insert_data = $this->ware->add($wareData);
+
+							if($insert_data['exists'] == FALSE){
+								$wareData['ware_id'] = $insert_data['insert_id'];
+								if($this->ware_details->add($wareData)){
+									$insertCount++;
+								}
+							}							
                         }
                     }
                         

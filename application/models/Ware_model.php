@@ -63,10 +63,38 @@ class Ware_model extends CI_Model {
                     ),
             'ware_category_id' => $new_row['ware_category_id']
         );
-        $this->db->insert('ware', $data);
 
-        $insert_id = $this->db->insert_id();
-        return $insert_id;
+        //$query = $this->db->query('SELECT name FROM ware WHERE name = '.$data['name']);
+        //$num_rows = $query->num_rows();
+
+        $query = $this->db->get_where(
+            'ware',
+            array(
+                'name' => $data['name']
+            )
+            );
+        $num_rows = $query->num_rows();
+
+        $query = $this->db->get_where(
+            'ware',
+            array(
+                'slug' => $data['slug']
+            )
+            );
+        $num_rows += $query->num_rows();
+
+        $return_data = array();
+
+        if($num_rows > 0){
+            $return_data['exists'] = TRUE;
+            $return_data['insert_id'] = -1;
+        }
+        else{
+            $this->db->insert('ware', $data);
+            $return_data['exists'] = FALSE;
+            $return_data['insert_id'] = $this->db->insert_id();
+        }
+        return $return_data;
     }
     public function delete($id){
         return $this->db->delete('ware',array('id' => $id));
