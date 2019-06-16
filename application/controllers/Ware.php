@@ -38,7 +38,7 @@ class Ware extends CI_Controller{
     //https://www.cloudways.com/blog/codeigniter-upload-file-image/
     public function upload($slug = null){
         $config['upload_path'] = './uploads/';
-        $config['allowed_types'] = 'gif|jpg|png';
+        $config['allowed_types'] = '*';
         $config['max_size'] = '2048000';
         $config['max_width'] = '1024';
         $config['max_height'] = '768';
@@ -50,6 +50,7 @@ class Ware extends CI_Controller{
         }
         else{
             $error = array('error' => $this->upload->display_errors());
+            $this->session->set_flashdata('message', $this->upload->display_errors());
         }
         redirect('ware/'.$slug);
     }

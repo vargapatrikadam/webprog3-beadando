@@ -21,7 +21,10 @@
     <?php echo "<input type='submit' name='submit' value='Feltölt' /> ";?>
     <?php echo "</form>"?>
     </div>
-  </div>  
+  </div>
+  <?php if(isset($_SESSION['message'])) :?>
+    <?php echo($_SESSION['message']); ?>
+  <?php endif; ?>
   <?php endif;?>
 <?php endif;?>
 
