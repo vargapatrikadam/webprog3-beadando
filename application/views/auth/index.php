@@ -70,6 +70,18 @@
     		<?php echo "<input type='file' name='file' size='20' />"; ?>
     		<?php echo "<input type='submit' name='importSubmit' value='Mehet' /> ";?>
     		<?php echo "</form>"?>
+
+			<h5>CSV formátuma</h5>
+			<div class="table-responsive">
+			<table class="table table-sm">
+			<tr>
+				<th scope="col">Name</th>
+				<th scope="col">Price</th>
+				<th scope="col">Description</th>
+				<th scope="col">Category</th>
+			</tr>
+			</table>
+	</div>
    		</div>
   	</div>  
 </div>
